@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.udacity.shoestore.MainActivity
 import com.udacity.shoestore.R
-import com.udacity.shoestore.databinding.FragmentBinding
+import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
 
 
 /**
@@ -18,10 +18,6 @@ import com.udacity.shoestore.databinding.FragmentBinding
  * create an instance of this fragment.
  */
 class ShoeDetailFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        (activity as MainActivity).actionBar!!.hide()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,10 +25,13 @@ class ShoeDetailFragment : Fragment() {
     ): View? {
 
         // Inflate the layout for this fragment
-        val binding: FragmentBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment, container, false)
+        val binding: FragmentShoeDetailBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_shoe_detail, container, false)
 //        activity!!.actionBar!!.hide()
 //        (activity as MainActivity).actionBar!!.hide()
+
+
+
         return binding.root
     }
 
