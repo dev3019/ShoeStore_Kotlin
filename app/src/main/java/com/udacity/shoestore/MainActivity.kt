@@ -29,10 +29,17 @@ class MainActivity : AppCompatActivity() {
         Timber.plant(Timber.DebugTree())
         navController = this.findNavController(R.id.nav_host_fragment)
         toolbar = findViewById(R.id.my_toolbar)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
         setSupportActionBar(toolbar)
-        setupWithNavController(toolbar, navController, appBarConfiguration)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.loginFragment,
+                R.id.welcomeFragment,
+                R.id.instructionsFragment
+            )
+        )
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+        setupWithNavController(toolbar, navController, appBarConfiguration)
+//        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     override fun onSupportNavigateUp(): Boolean {
