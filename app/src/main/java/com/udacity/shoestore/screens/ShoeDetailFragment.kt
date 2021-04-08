@@ -31,7 +31,6 @@ class ShoeDetailFragment : Fragment() {
 //        (activity as MainActivity).actionBar!!.hide()
 
 
-
         return binding.root
     }
 

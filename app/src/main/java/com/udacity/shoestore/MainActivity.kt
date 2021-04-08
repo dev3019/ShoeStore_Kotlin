@@ -17,12 +17,14 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.udacity.shoestore.models.SharedViewModel
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
     lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var navController: NavController
     lateinit var toolbar: Toolbar
+    lateinit var viewModel: SharedViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
