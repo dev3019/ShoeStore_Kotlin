@@ -7,9 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.MainActivity
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
+import com.udacity.shoestore.models.SharedViewModel
+import com.udacity.shoestore.models.Shoe
 
 
 /**
@@ -18,6 +22,7 @@ import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
  * create an instance of this fragment.
  */
 class ShoeDetailFragment : Fragment() {
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,8 +32,18 @@ class ShoeDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding: FragmentShoeDetailBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_shoe_detail, container, false)
-//        activity!!.actionBar!!.hide()
-//        (activity as MainActivity).actionBar!!.hide()
+
+        binding.sharedModel = sharedViewModel
+        binding.saveBtn.setOnClickListener {
+            sharedViewModel._shoe_.value = Shoe(
+                binding.shoeNameEditText.text.toString(),
+                binding.shoeSizeEditText.text.toString().toDouble(),
+                binding.companyNameEditText.text.toString(),
+                binding.descriptionEditText.text.toString()
+            )
+            sharedViewModel.addShoe()
+            findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
+        }
 
 
         return binding.root

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
+import com.udacity.shoestore.databinding.ItemLayoutBinding
 import com.udacity.shoestore.models.SharedViewModel
 
 
@@ -21,7 +23,7 @@ import com.udacity.shoestore.models.SharedViewModel
  */
 class ShoeListFragment : Fragment() {
 
-    private lateinit var viewModel: SharedViewModel
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     private lateinit var binding: FragmentShoeListBinding
 
     override fun onCreateView(
@@ -32,23 +34,22 @@ class ShoeListFragment : Fragment() {
         setHasOptionsMenu(true)
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_shoe_list, container, false)
-
+        binding.lifecycleOwner = this
         binding.addDetailButton.setOnClickListener {
             findNavController().navigate(ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment())
         }
 
-        viewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
-
-//        displayList()
-//        if (!(viewModel.shoeList.value.isNullOrEmpty())){
-//            viewModel.shoeList.observe(this, Observer {
-//                it.forEach(
-////                    DataBindingUtil.inflate(inflater,R.layout.item_layout,container,false)/
-//                )
-//            })
-//            binding.shoeListLayout.addView()
-
-//        }
+        sharedViewModel.shoeList.observe(this, Observer {
+            it.forEach {
+                val newView = DataBindingUtil.inflate<ItemLayoutBinding>(
+                    inflater,
+                    R.layout.item_layout,
+                    container,
+                    false
+                )
+                binding.shoeListLayout.addView(newView.root)
+            }
+        })
 
         // Inflate the layout for this fragment
         return binding.root
@@ -65,19 +66,5 @@ class ShoeListFragment : Fragment() {
             view!!.findNavController()
         ) || super.onOptionsItemSelected(item)
     }
-
-
-//    fun displayList(){
-//
-//        if (!(viewModel.shoeList.value.isNullOrEmpty())){
-//            viewModel.shoeList.observe(this, Observer {
-//                it.forEach(
-//                    DataBindingUtil.inflate(layoutInflater,R.layout.item_layout,binding)
-//                )
-//            })
-////            binding.shoeListLayout.addView()
-//
-//        }
-//    }
 
 }
