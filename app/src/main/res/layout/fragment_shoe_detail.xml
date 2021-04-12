@@ -3,11 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="sharedModel"
-            type="com.udacity.shoestore.models.SharedViewModel" />
-    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -76,7 +71,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/shoeName_textView"
-            app:layout_constraintTop_toBottomOf="@+id/data_textView" />
+            app:layout_constraintTop_toBottomOf="@+id/data_textView"
+            android:text="@={sharedModel._shoe_.name}"/>
+
 
         <TextView
             android:id="@+id/companyName_textView"
@@ -108,7 +105,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/companyName_textView"
-            app:layout_constraintTop_toBottomOf="@+id/shoeName_editText" />
+            app:layout_constraintTop_toBottomOf="@+id/shoeName_editText"
+            android:text="@={sharedModel._shoe_.company}"/>
+
 
         <TextView
             android:id="@+id/shoeSize_textView"
@@ -133,14 +132,16 @@
             android:layout_marginEnd="16dp"
             android:ems="10"
             android:hint="@string/size_text"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:textColor="@android:color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/description_editText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/shoeSize_textView"
-            app:layout_constraintTop_toBottomOf="@+id/companyName_editText" />
+            app:layout_constraintTop_toBottomOf="@+id/companyName_editText"
+            android:text="@={``+sharedModel._shoe_.size}"/>
+
 
         <TextView
             android:id="@+id/description_textView"
@@ -173,7 +174,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/description_textView"
-            app:layout_constraintTop_toBottomOf="@+id/shoeSize_editText" />
+            app:layout_constraintTop_toBottomOf="@+id/shoeSize_editText"
+            android:text="@={sharedModel._shoe_.description}"/>
+
 
         <Button
             android:id="@+id/cancel_btn"
@@ -203,4 +206,11 @@
             app:layout_constraintTop_toBottomOf="@+id/description_editText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="sharedModel"
+            type="com.udacity.shoestore.models.SharedViewModel" />
+    </data>
 </layout>

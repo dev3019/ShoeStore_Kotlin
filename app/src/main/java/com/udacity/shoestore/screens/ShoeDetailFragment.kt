@@ -34,17 +34,15 @@ class ShoeDetailFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_shoe_detail, container, false)
 
         binding.sharedModel = sharedViewModel
+        println(sharedViewModel.shoeList.value)
         binding.saveBtn.setOnClickListener {
-            sharedViewModel._shoe_.value = Shoe(
-                binding.shoeNameEditText.text.toString(),
-                binding.shoeSizeEditText.text.toString().toDouble(),
-                binding.companyNameEditText.text.toString(),
-                binding.descriptionEditText.text.toString()
-            )
             sharedViewModel.addShoe()
             findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
         }
 
+        binding.cancelBtn.setOnClickListener {
+            findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
+        }
 
         return binding.root
     }

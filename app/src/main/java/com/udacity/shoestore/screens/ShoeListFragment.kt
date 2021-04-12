@@ -2,6 +2,7 @@ package com.udacity.shoestore.screens
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -14,6 +15,7 @@ import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
 import com.udacity.shoestore.databinding.ItemLayoutBinding
 import com.udacity.shoestore.models.SharedViewModel
+import timber.log.Timber
 
 
 /**
@@ -39,6 +41,7 @@ class ShoeListFragment : Fragment() {
             findNavController().navigate(ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment())
         }
 
+//        inflating the item_layout with shoe data
         sharedViewModel.shoeList.observe(this, Observer {
             it.forEach {
                 val newView = DataBindingUtil.inflate<ItemLayoutBinding>(
@@ -47,6 +50,7 @@ class ShoeListFragment : Fragment() {
                     container,
                     false
                 )
+                newView.shoe = it
                 binding.shoeListLayout.addView(newView.root)
             }
         })
@@ -61,6 +65,7 @@ class ShoeListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Toast.makeText(this.context, "You've successfully Logged out.", Toast.LENGTH_SHORT).show()
         return NavigationUI.onNavDestinationSelected(
             item,
             view!!.findNavController()

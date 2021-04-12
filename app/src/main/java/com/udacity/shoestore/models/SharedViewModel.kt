@@ -7,43 +7,31 @@ import androidx.lifecycle.ViewModel
 import com.udacity.shoestore.models.Shoe
 
 class SharedViewModel : ViewModel() {
-    private var _isLogged = MutableLiveData<Boolean>()
+//    private var _isLogged = MutableLiveData<Boolean>()
 
 
-    private var _shoeList = MutableLiveData<MutableList<Shoe>>(
-        mutableListOf(
-            Shoe(
-                "Subakov", 7.0, "ADIDAS", "Style Refined"
-            ),
-            Shoe(
-                "Climax", 9.0, "NIKE", "Float like a butterfly"
-            ),
-            Shoe(
-                "XOOM", 8.5, "PUMA", "Run like a cheetah"
-            )
-        )
-    )
+    private var _shoeList = MutableLiveData<MutableList<Shoe>>()
 
     val shoeList: LiveData<MutableList<Shoe>>
         get() = _shoeList
 
+    //to access the value from XML (two-way data binding)
     val _shoe_=MutableLiveData<Shoe>()
     private var _shoe = MutableLiveData<Shoe>()
-    val shoe: LiveData<Shoe>
-        get() = _shoe
 
-    fun loginActivity() {
-        _isLogged.value = !_isLogged.value!!
-    }
+//    fun loginActivity() {
+//        _isLogged.value = !_isLogged.value!!
+//    }
 
     fun addShoe() {
         _shoe.value = _shoe_.value
         _shoeList.value?.add(_shoe.value!!)
-        println(_shoeList.value)
+        _shoe_.value = Shoe()
     }
 
     init {
-//        _shoeList.value = mutableListOf()
-        _isLogged.value = true
+        _shoe_.value = Shoe()
+        _shoeList.value = mutableListOf()
+//        _isLogged.value = true
     }
 }
