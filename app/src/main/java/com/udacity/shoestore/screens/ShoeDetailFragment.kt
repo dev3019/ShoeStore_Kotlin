@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
@@ -36,8 +37,19 @@ class ShoeDetailFragment : Fragment() {
         binding.sharedModel = sharedViewModel
         println(sharedViewModel.shoeList.value)
         binding.saveBtn.setOnClickListener {
-            sharedViewModel.addShoe()
-            findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
+            if (binding.shoeSizeEditText.text.isNullOrBlank() ||
+                binding.shoeNameEditText.text.isNullOrBlank() ||
+                binding.companyNameEditText.text.isNullOrBlank()
+            ) {
+                Toast.makeText(
+                    this.context,
+                    "Only description can be left blank",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                sharedViewModel.addShoe()
+                findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
+            }
         }
 
         binding.cancelBtn.setOnClickListener {

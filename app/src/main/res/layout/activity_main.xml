@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container">
 
+    <!--  I'm using constraint layout here because I can start the fragment from under the toolbar
+          whereas in linear layout it leaves some space between toolbar and fragment  -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"

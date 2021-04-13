@@ -2,7 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <!--Here constraint layout is used because all the elements are chained vertically and  horizontally
+        (textView with editView) get perfectly aligned. I tried using linearLayout but they didn't come out
+        so symmetrical-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -65,14 +67,14 @@
             android:ems="10"
             android:hint="@string/shoeName_text"
             android:inputType="textPersonName"
+            android:text="@={sharedModel._shoe_.name}"
             android:textColor="@android:color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/companyName_editText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/shoeName_textView"
-            app:layout_constraintTop_toBottomOf="@+id/data_textView"
-            android:text="@={sharedModel._shoe_.name}"/>
+            app:layout_constraintTop_toBottomOf="@+id/data_textView" />
 
 
         <TextView
@@ -99,14 +101,14 @@
             android:ems="10"
             android:hint="@string/company_text"
             android:inputType="textPersonName"
+            android:text="@={sharedModel._shoe_.company}"
             android:textColor="@android:color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/shoeSize_editText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/companyName_textView"
-            app:layout_constraintTop_toBottomOf="@+id/shoeName_editText"
-            android:text="@={sharedModel._shoe_.company}"/>
+            app:layout_constraintTop_toBottomOf="@+id/shoeName_editText" />
 
 
         <TextView
@@ -133,14 +135,14 @@
             android:ems="10"
             android:hint="@string/size_text"
             android:inputType="number"
+            android:text="@={``+sharedModel._shoe_.size}"
             android:textColor="@android:color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/description_editText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/shoeSize_textView"
-            app:layout_constraintTop_toBottomOf="@+id/companyName_editText"
-            android:text="@={``+sharedModel._shoe_.size}"/>
+            app:layout_constraintTop_toBottomOf="@+id/companyName_editText" />
 
 
         <TextView
@@ -167,6 +169,7 @@
             android:ems="10"
             android:hint="@string/desc_textView"
             android:inputType="textPersonName"
+            android:text="@={sharedModel._shoe_.description}"
             android:textAlignment="textStart"
             android:textColor="@android:color/black"
             android:textSize="12sp"
@@ -174,8 +177,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/description_textView"
-            app:layout_constraintTop_toBottomOf="@+id/shoeSize_editText"
-            android:text="@={sharedModel._shoe_.description}"/>
+            app:layout_constraintTop_toBottomOf="@+id/shoeSize_editText" />
 
 
         <Button
